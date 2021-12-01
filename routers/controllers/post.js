@@ -12,12 +12,13 @@ const getallpost = (req, res) => {
 };
 
 const createpost = (req, res) => {
-  const {img,desc,date,like} = req.body;
+  const {img,desc,date,like,isDel} = req.body;
   const newpost = new postmodel ({
   img:req.body.img,
   desc:req.body.desc,
   date:req.body.date,
-  like:req.body.like
+  like:req.body.like,
+  isDel:req.body.isDel
   });
   newpost
     .save()
@@ -32,7 +33,7 @@ const deletepost = (req, res) => {
   const { id } = req.params;
 
   postmodel
-    .findOneAndRemove({ _id: id }, { new: true })
+    .findByIdAndUpdate({ _id: id }, { new: true })
     .exec()
     .then((result) => {
       res.json(result);
