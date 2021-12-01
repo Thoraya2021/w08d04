@@ -35,7 +35,6 @@ const getcommentById = (req, res) => {
 const createcomment = (req, res) => {
     const newcomment = new commentmodel ({
   text:req.body.text,
-  date:req.body.date,
   user: req.token.id
   });
   newcomment
@@ -58,6 +57,7 @@ const deletecomment = (req, res) => {
         res.status(404).json("the comment not found");
       }
     })
+    
     .catch((err) => {
       res.status(400).json(err);
     });

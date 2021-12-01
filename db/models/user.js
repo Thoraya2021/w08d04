@@ -4,6 +4,7 @@ const usermodel = new mongoose.Schema({
     username: { type: String, required: true },
     password: { type: String, default: false },
     avatar: { type: String, required: false },
-    role:[{ type: mongoose.Schema.Types.ObjectId, ref: "role" }],
+    isDel: { type: Boolean, default: false },
+    role:{type: mongoose.Schema.Types.ObjectId, ref: "role"},
   });
   module.exports =mongoose.model('User', usermodel);
