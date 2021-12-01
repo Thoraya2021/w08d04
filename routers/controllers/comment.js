@@ -4,7 +4,9 @@ const getallcomment = (req, res) => {
     commentmodel
 
 
-    .find({ isDel: false, user: req.token.id })
+    .find({ isDel: false, user: req.token.id,
+    post:req.token.id
+    })
     .then((result) => {
       res.status(200).json(result);
     })
@@ -12,7 +14,6 @@ const getallcomment = (req, res) => {
       res.status(400).json(err);
     });
 };
-
 
 const getcommentById = (req, res) => {
   const { id } = req.params;
