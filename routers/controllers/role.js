@@ -1,6 +1,7 @@
 const rolemodel =require ("./../../db/models/role");
 const create = (req, res) => { 
   const newRole = new rolemodel(req.body);
+  
   newRole
     .save()
     .then((result) => {
@@ -20,8 +21,6 @@ const roles = (req, res) => {
       res.status(400).json(err);
     });
 };
-
-
 module.exports = {
   create,
   roles,
