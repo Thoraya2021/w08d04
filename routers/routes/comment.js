@@ -1,14 +1,15 @@
 const express = require("express");
-const authentication =require('./../../routers/middleware/authentication')
-const {createcomment ,  deleteComment,  updateComment }=require ('./../controllers/comment');
+//const authentication =require('./../../routers/middleware/authentication')
+const {
+  createcomment,
+  deleteComment,
+  updateComment,
+} = require("./../controllers/comment");
 
 const commentRouter = express.Router();
 
+commentRouter.post("/createcomment", createcomment);
+commentRouter.delete("/deletecomment/:id", deleteComment);
+commentRouter.put("/updatecomment/:id", updateComment);
 
-commentRouter.post("/createcomment",authentication, createcomment);
-commentRouter.delete("/deletecomment/:id",authentication,deleteComment);
-commentRouter.put("/updatecomment/:id", authentication, updateComment );
-
-
-module.exports = commentRouter ;
-
+module.exports = commentRouter;
