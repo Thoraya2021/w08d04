@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 const SECRET_KEY = process.env.SECRET_KEY;
 
-
-
 const getallUser = (req, res) => {
   usermodel
     .find({})
@@ -17,11 +15,11 @@ const getallUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-  const id = req.params.id;
-  console.log(id);
+  const { id } = req.params.id;
+  //console.log(id);
   usermodel
-    .findByIdAndDelete(id)
-    .then(() => {
+  .findByIdAndUpdate(id, { $set: { isDel: true } })
+    .then((result) => {
       res.status(200).json("user has deleted");
     })
     .catch((err) => {
@@ -73,7 +71,7 @@ const login = (req, res) => {
 
             const token = await jwt.sign(payload, SECRET_KEY, options);
 
-            res.status(200).json({result, token});
+            res.status(200).json({ result, token });
           } else {
             res.status(400).json("invalid email or password");
           }
@@ -81,7 +79,7 @@ const login = (req, res) => {
           res.status(400).json("invalid email or password");
         }
       } else {
-        res.status(400).json("email do not found");
+        res.status(400).json("invalid email or password");
       }
     })
     .catch((err) => {
