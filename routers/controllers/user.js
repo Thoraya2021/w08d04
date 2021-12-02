@@ -65,10 +65,16 @@ const login = (req, res) => {
               role: result.role,
             };
 
+
+
+
             const options = {
               expiresIn: "60m",
             };
 
+
+
+            
             const token = await jwt.sign(payload, SECRET_KEY, options);
 
             res.status(200).json({ result, token });

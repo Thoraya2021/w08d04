@@ -1,13 +1,24 @@
 const postmodel =require('./../../db/models/post');
+const likemodel = require("../../db/models/like");
+const rolemodel = require("../../db/models/role");
+const comment = require("../../db/models/comment");
+
 
 const getallpost = (req, res) => {
     postmodel
-    .find({})
+    .find({ isDel: false })
+    .populate("user")
     .then((result) => {
-      res.send(result);
+      if (result) {
+       
+        res.status(200).json({ result });
+      } else {
+        res.status(404).json("the post not fount");
+      }
     })
+
     .catch((err) => {
-      res.send(err);
+      res.status(400).json(err);
     });
 };
 
@@ -15,7 +26,8 @@ const createpost = (req, res) => {
   const newpost = new postmodel ({
   img:req.body.img,
   desc:req.body.desc,
-  like:req.body.like,
+ //user: req.token.id 
+
   });
   newpost
     .save()
