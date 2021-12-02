@@ -1,8 +1,6 @@
 const commentmodel =require('./../../db/models/comment');
-const rolemodel =require('./../../db/models/role');
+//const rolemodel =require('./../../db/models/role');
 const postmodel =require('./../../db/models/post');
-
-
 
 const createcomment= (req, res) => {
  
@@ -52,8 +50,9 @@ if (text.user == req.token.id ||  post.user == req.token.id
 
 
 const updateComment = (req, res) => {
-  const { text } = req.body;
   const { id } = req.params;
+  const { text } = req.body;
+  
   commentmodel
 
     .findByIdAndUpdate(id, { $set: { text: text} })

@@ -1,6 +1,6 @@
 const express = require("express");
-const authentication = require("./../../routers/middleware/authentication");
-const authorization = require("./../../routers/middleware/authorization");
+//const authentication = require("./../../routers/middleware/authentication");
+//const authorization = require("./../../routers/middleware/authorization");
 const {
   login,
   signup,

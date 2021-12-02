@@ -1,7 +1,7 @@
 const postmodel =require('./../../db/models/post');
 const likemodel = require("../../db/models/like");
-const rolemodel = require("../../db/models/role");
-const comment = require("../../db/models/comment");
+//const rolemodel = require("../../db/models/role");
+//const comment = require("../../db/models/comment");
 
 
 const getallpost = (req, res) => {
@@ -54,22 +54,19 @@ const deletepost = (req, res) => {
         res.status(400).json(err);
       });
   };
-
-
-
-
+///////////like model
 
   const addLike = (req, res) => {
-    const { postId } = req.body;
-    const newlike = new likeModel({
-      postId: postId,
-      userId: req.token.id,
+    const { post} = req.body;
+    const newlike = new likemodel({
+      post: post,
+      user: req.token.id,
     });
     newlike
       .save()
       .then((result) => {
-        postModel
-          .findByIdAndUpdate(postId, { $push: { likeId: result._id } })
+        postmodel
+          .findByIdAndUpdate(post, { $push: { likeId: result._id } })
           .then((result) => {
           });
           res.status(201).json(result);
@@ -80,7 +77,7 @@ const deletepost = (req, res) => {
   };
   const deleteLike = (req, res) => {
     const { id } = req.params;
-    likeModel
+    likemodel
       .findByIdAndRemove(id , req.token.id)
       .exec()
       .then((result) => {
@@ -90,7 +87,6 @@ const deletepost = (req, res) => {
         res.status(400).json(err);
       });
   };
-  module.exports = { deleteLike, addLike };
+  module.exports = { };
 
-
-module.exports = { getallpost ,createpost , deletepost};
+module.exports = { getallpost ,createpost , deletepost,deleteLike, addLike };
