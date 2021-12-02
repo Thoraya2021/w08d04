@@ -1,6 +1,8 @@
 const rolemodel =require ("./../../db/models/role");
 const create = (req, res) => { 
-  const newRole = new rolemodel(req.body);
+  const {role,Permissions} = req.body
+
+  const newRole = new rolemodel({role,Permissions});
   
   newRole
     .save()

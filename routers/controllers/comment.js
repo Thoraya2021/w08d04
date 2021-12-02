@@ -57,8 +57,7 @@ const deletecomment = (req, res) => {
         res.status(404).json("the comment not found");
       }
     })
-    
-    .catch((err) => {
+.catch((err) => {
       res.status(400).json(err);
     });
 };
