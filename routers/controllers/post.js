@@ -26,7 +26,7 @@ const createpost = (req, res) => {
   const newpost = new postmodel ({
   img:req.body.img,
   desc:req.body.desc,
- //user: req.token.id 
+  user: req.token.id,
 
   });
   newpost
