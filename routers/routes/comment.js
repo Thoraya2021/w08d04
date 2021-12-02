@@ -5,7 +5,7 @@ const {createcomment ,  deleteComment,  updateComment }=require ('./../controlle
 const commentRouter = express.Router();
 
 
-commentRouter.post("/createcomment", authentication, createcomment);
+commentRouter.post("/createcomment",authentication, createcomment);
 commentRouter.delete("/deletecomment/:id",authentication,deleteComment);
 commentRouter.put("/updatecomment/:id", authentication, updateComment );
 

@@ -1,15 +1,13 @@
 const commentmodel =require('./../../db/models/comment');
 const rolemodel =require('./../../db/models/role');
-const postmodel =require('./../../db/models/post')
-const usermodel=require('./../../db/models/user')
-
-
+//const postmodel =require('./../../db/models/post')
+//const usermodel=require('./../../db/models/user')
 const createcomment= (req, res) => {
   const { text, user, post } = req.body;
   const newcomment = new commentmodel({
-    text ,
+    text,
     post,
-    user
+   user
     //req.token.user,
   });
   newcomment
@@ -21,6 +19,7 @@ const createcomment= (req, res) => {
       res.status(400).json(err);
     });
 };
+
 
 const deleteComment = async (req, res) => {
   const { id } = req.params;
@@ -43,6 +42,8 @@ const deleteComment = async (req, res) => {
     res.status(403).json({ message: "forbiden" });
   }
 };
+
+
 const updateComment = (req, res) => {
   const { text } = req.body;
   const { id } = req.params;
