@@ -54,4 +54,43 @@ const deletepost = (req, res) => {
         res.status(400).json(err);
       });
   };
+
+
+
+
+
+  const addLike = (req, res) => {
+    const { postId } = req.body;
+    const newlike = new likeModel({
+      postId: postId,
+      userId: req.token.id,
+    });
+    newlike
+      .save()
+      .then((result) => {
+        postModel
+          .findByIdAndUpdate(postId, { $push: { likeId: result._id } })
+          .then((result) => {
+          });
+          res.status(201).json(result);
+        })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  };
+  const deleteLike = (req, res) => {
+    const { id } = req.params;
+    likeModel
+      .findByIdAndRemove(id , req.token.id)
+      .exec()
+      .then((result) => {
+        res.status(200).json("dislike");
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  };
+  module.exports = { deleteLike, addLike };
+
+
 module.exports = { getallpost ,createpost , deletepost};

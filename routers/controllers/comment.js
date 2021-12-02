@@ -1,18 +1,29 @@
 const commentmodel =require('./../../db/models/comment');
 const rolemodel =require('./../../db/models/role');
-//const postmodel =require('./../../db/models/post')
-//const usermodel=require('./../../db/models/user')
+const postmodel =require('./../../db/models/post');
+
+
+
 const createcomment= (req, res) => {
-  const { text, user, post } = req.body;
-  const newcomment = new commentmodel({
+ 
+  const { id } = req.params;
+
+  const { text, isDel } = req.body;
+
+  const newComment = new commentmodel({
     text,
-    post,
-   user
-    //req.token.user,
+    isDel,
+    user: req.token.id,
+    post: id,
   });
-  newcomment
+  newComment
     .save()
     .then((result) => {
+      postmodel
+        .findByIdAndUpdate(id, { $push: { text: result._id } })
+        .then((result) => {
+          console.log(result);
+        });
       res.status(201).json(result);
     })
     .catch((err) => {
@@ -20,15 +31,11 @@ const createcomment= (req, res) => {
     });
 };
 
-
 const deleteComment = async (req, res) => {
   const { id } = req.params;
-  const comment = await commentmodel.findById(id);
-
-  if (
-    comment.user === req.token.user||
-    req.token.role === "61a86bf6f1ba3e7e46aa41b7"
-  ) {
+  const text = await commentmodel.findById(id);
+if (text.user == req.token.id ||  post.user == req.token.id
+            ) {
     commentmodel
       .findByIdAndUpdate(id, { $set: { isDel: true } })
       .exec()
