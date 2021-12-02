@@ -1,36 +1,4 @@
 const commentmodel =require('./../../db/models/comment');
-
-const getallcomment = (req, res) => {
-    commentmodel
-
-
-    .find({ isDel: false, user: req.token.id,
-    post:req.token.id
-    })
-    .then((result) => {
-      res.status(200).json(result);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
-};
-
-const getcommentById = (req, res) => {
-  const { id } = req.params;
-
-  commentmodel
-    .find({ _id: id, user: req.token.id })
-    .then((result) => {
-      if (result) {
-        res.status(200).json(result);
-      } else {
-        res.status(404).json("the comment not found");
-      }
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
-};
 //user add comments
 const createcomment = (req, res) => {
     const newcomment = new commentmodel ({
@@ -80,4 +48,4 @@ const updatecomment = (req, res) => {
   };
 
 
-module.exports = {  getallcomment, getcommentById ,createcomment  ,deletecomment ,updatecomment};
+module.exports = { createcomment  ,deletecomment ,updatecomment};
