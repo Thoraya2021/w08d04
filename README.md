@@ -36,5 +36,3 @@ npm i bcrypt
 6-Install packages >>>
 npm install jsonwebtoken
 
-6-Install packages
-npm install jsonwebtoken
