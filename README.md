@@ -33,10 +33,12 @@ npm i mongoose
 5-Install packages password encoding >>>
 npm i bcrypt
 
+6-Install packages >>>
+npm install jsonwebtoken
+
+
 
 # UML Diagrams
 
-![Screenshot (7).png]
-6-Install packages >>>
-npm install jsonwebtoken
+![] (Screenshot (7).png)
 
