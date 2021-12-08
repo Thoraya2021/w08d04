@@ -40,5 +40,5 @@ npm install jsonwebtoken
 
 # UML Diagrams
 
-![uml](Screenshot (7).png)
+
 
