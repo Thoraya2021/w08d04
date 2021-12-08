@@ -41,6 +41,6 @@ npm install jsonwebtoken
 ![ ](https://github.com/Thoraya2021/w08d04/blob/main/Screenshot%20(7).png)
 
 # UML Diagrams
-
+![ ](https://github.com/Thoraya2021/w08d04/blob/main/Screenshot%20(9).png)
 
 
