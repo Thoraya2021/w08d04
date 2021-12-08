@@ -39,7 +39,7 @@ npm install jsonwebtoken
 
 
 # UML Diagrams
-![ ](https://myoctocat.com/assets/images/base-octocat.svg)
+![ ](https://github.com/Thoraya2021/w08d04/blob/main/Screenshot%20(7).png)
 
 # ER diagram
 
