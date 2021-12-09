@@ -54,39 +54,79 @@ const deletepost = (req, res) => {
         res.status(400).json(err);
       });
   };
-///////////like model
 
-  const addLike = (req, res) => {
-    const { post} = req.body;
-    const newlike = new likemodel({
-      post: post,
-      user: req.token.id,
-    });
-    newlike
-      .save()
-      .then((result) => {
-        postmodel
-          .findByIdAndUpdate(post, { $push: { likeId: result._id } })
-          .then((result) => {
-          });
-          res.status(201).json(result);
-        })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
-  };
-  const deleteLike = (req, res) => {
+
+  const addLike = async (req, res) => {
     const { id } = req.params;
-    likemodel
-      .findByIdAndRemove(id , req.token.id)
-      .exec()
-      .then((result) => {
-        res.status(200).json("dislike");
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
+    const { like } = req.body;
+  
+    if (like) {
+      try {
+        const like = await likemodel.findOne({
+          post: id,
+          user: req.token.id,
+        });
+  
+        if (like) {
+          likemodel
+            .findOneAndUpdate(
+              { post: id, user: req.token.id, like: false },
+              { like: true },
+              { new: true }
+            )
+            .then((result) => {
+              if (result) {
+                res
+                  .status(200)
+                  .json({ message:"like successfully" });
+              } else {
+                res
+                  .status(404)
+                  .json({ message: `not found: ${id}` });
+              }
+            })
+            .catch((err) => {
+              res.status(400).json(err);
+            });
+        } else {
+          const newlike = new likemodel({
+            post: id,
+            user: req.token.id,
+          });
+              newlike
+            .save()
+            .then((result) => {
+              res.status(201).json(result);
+            })
+            .catch((err) => {
+              res.status(400).json(err);
+            });
+        }
+      } catch (error) {
+        res.status(400).json(error);
+      }
+    } else {
+      likemodel
+        .findOneAndUpdate(
+          { post: id, user: req.token.id, like: true },
+          { like: false },
+          { new: true }
+        )
+        .then((result) => {
+          if (result) {
+            res
+              .status(200)
+              .json({ message: "unliked successfully" });
+          } else {
+            res
+              .status(404)
+              .json({ message: `not found${id}` });
+          }
+        })
+        .catch((err) => {
+          res.status(400).json(err);
+        });
+    }
   };
-  module.exports = { };
-
-module.exports = { getallpost ,createpost , deletepost,deleteLike, addLike };
+     
+module.exports = {getallpost ,createpost , deletepost, addLike };
