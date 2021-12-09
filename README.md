@@ -36,5 +36,11 @@ npm i bcrypt
 6-Install packages >>>
 npm install jsonwebtoken
 
-6-Install packages
-npm install jsonwebtoken
+
+# ER diagram
+![ ](https://github.com/Thoraya2021/w08d04/blob/main/Screenshot%20(7).png)
+
+# UML Diagrams
+![ ](https://github.com/Thoraya2021/w08d04/blob/main/Screenshot%20(9).png)
+
+
