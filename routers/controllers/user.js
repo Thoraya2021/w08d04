@@ -36,6 +36,7 @@ const signup = async (req, res) => {
   const SALT = Number(process.env.SALT);
   const savedEmail = email.toLowerCase();
   const hashedPassword = await bcrypt.hash(password, SALT);
+
   const newUser = new usermodel({
     email: savedEmail,
     password: hashedPassword,
@@ -103,15 +104,12 @@ const login = (req, res) => {
             };
             const token = await jwt.sign(payload, SECRET_KEY, options);
 
-            res.status(200).json({ result, token });
+            res.status(200).json({ result, token});
           } else {
             res.status(400).json("invalid email or password");
           }
-        } else {
-          res.status(400).json("invalid email or password");
-        }
-      } else {
-        res.status(400).json("invalid email or password");
+        
+      } 
       }
     })
     .catch((err) => {

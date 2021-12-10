@@ -1,6 +1,6 @@
 const postmodel =require('./../../db/models/post');
 const likemodel = require("../../db/models/like");
-//const rolemodel = require("../../db/models/role");
+const usermodel = require("../../db/models/user");
 //const comment = require("../../db/models/comment");
 
 
@@ -8,9 +8,9 @@ const getallpost = (req, res) => {
     postmodel
     .find({ isDel: false })
     .populate("user")
+    .sort ({"createdAt":-1})
     .then((result) => {
       if (result) {
-       
         res.status(200).json({ result });
       } else {
         res.status(404).json("the post not fount");

@@ -5,7 +5,7 @@ const postmodel = new mongoose.Schema({
     isDel: { type: Boolean, default: false },
     comment:{ type: mongoose.Schema.Types.ObjectId, ref: "comment" },
     user: {type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    like:  { type: mongoose.Schema.Types.ObjectId, ref: "Like" },
+    like:  { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   {timestamps: true}
   );
