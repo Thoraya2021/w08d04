@@ -37,7 +37,7 @@ const signup = async (req, res) => {
   const savedEmail = email.toLowerCase();
   const hashedPassword = await bcrypt.hash(password, SALT);
 
-  const newUser = new usermodel({
+  const newuser = new usermodel({
     email: savedEmail,
     password: hashedPassword,
     username,
@@ -72,7 +72,7 @@ if (email && username) {
   }
   }
 */  
-  newUser
+  newuser
     .save()
     .then((result) => {
       res.status(201).json(result);
