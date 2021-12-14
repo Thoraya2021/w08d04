@@ -4,6 +4,7 @@ const cors = require("cors");
 require("./db/index");
 
 
+
 const app = express();
 dotenv.config();
 
@@ -13,8 +14,9 @@ const postRouter=require('./routers/routes/post')
 const commentRouter =require('./routers/routes/comment')
 
 
-
-app.use(express.json());
+app.use(express.json({limit:"30mb", extended: true}));
+app. use(express.urlencoded({limit: " 30mb" , extended: false}))
+//app.use(express.json());
 app.use(cors());
 app.use(express.json());
 app.use(cors());

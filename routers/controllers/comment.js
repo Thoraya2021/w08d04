@@ -2,6 +2,19 @@ const commentmodel =require('./../../db/models/comment');
 //const rolemodel =require('./../../db/models/role');
 const postmodel =require('./../../db/models/post');
 
+
+
+
+const getComments = (req, res) => {
+  commentmodel.find({ post: req.body.postID, isDeleted:false }).populate('user')
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+};
+
 const createcomment= (req, res) => {
  
   const { id } = req.params;
@@ -67,6 +80,7 @@ const updateComment = (req, res) => {
 };
 
 module.exports = {
+  getComments ,
   createcomment,
   updateComment,
   deleteComment,
