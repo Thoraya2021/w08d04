@@ -22,9 +22,30 @@ const getallpost = (req, res) => {
     });
 };
 
+
+const createpost = (req, res) => {
+  const{img, desc}=req.body;
+  const newpost = new postmodel({ img, desc
+});
+
+//const newTodo = new todoModel({ name: req.body.name, user: req.token.id });
+    newpost
+      .save()
+      .then((result) => {
+        res.status(201).json(result);
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      });
+  };
+
+
+
+
+/*
 const createpost = (req, res) => {
   const newpost = new postmodel ({
-  img:req.body.img,
+  //img:req.body.img,
   desc:req.body.desc,
   user: req.token.id,
 
@@ -37,7 +58,7 @@ const createpost = (req, res) => {
     .catch((err) => {
       res.send(err);
     });
-};
+};*/
 const deletepost = (req, res) => {
     const { id } = req.params;
     postmodel

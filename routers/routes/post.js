@@ -5,7 +5,7 @@ const { getallpost, createpost, deletepost, addLike  } = require("./../controlle
 const postRouter = express.Router();
 
 postRouter.get("/getpost", getallpost);
-postRouter.post("/createpost", authentication, createpost);
+postRouter.post("/createpost", createpost);
 postRouter.delete("/deletepost/:id", authentication, deletepost);
 postRouter.put("/addLike:id", addLike);
 
